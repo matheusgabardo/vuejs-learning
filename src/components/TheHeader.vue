@@ -8,7 +8,22 @@
 
 <script>
     export default {
-        name: 'TheHeader'
+        name: 'TheHeader',
+        mounted(){
+            window.addEventListener('resize', this.resize)
+        },
+        beforeUnmount(){
+            console.log('beforeUnmount');
+            window.removeEventListener('resize', this.resize)
+        },
+        // unmounted(){
+        //     console.log('unmounted');
+        // },
+        methods: {
+            resize($evt){
+                console.log('alterou a janela', $evt)
+            }
+        }
     }
 </script>
 
