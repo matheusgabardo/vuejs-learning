@@ -1,25 +1,20 @@
 <template>
   <div>
+    
     <div>
-      <h1 :class="{ 'title': true, 'title-home': isHome }">aa</h1>
-      <p :class="pClass">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure tempore nesciunt fugit suscipit voluptatum illo, hic laborum ea quaerat corrupti ipsam quia ad officiis autem veniam? Necessitatibus laborum autem reprehenderit.</p>
-      <p :style="styleClass">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione quaerat aut voluptatem dicta nulla a error doloribus, velit eaque provident quos, sapiente voluptate tempore expedita odio soluta! Harum, quasi molestias?</p>
-    </div>
-      <div 
-        v-for="(obj, index) in todos"
-        :key="obj.id"
-        class="todos-item"
-      >
-        <div>
-          <img
-            :if="obj.imgSrc"
-            :src="obj.imgSrc"
-            :alt="obj.imgAlt"
-          />
-        </div>
-        {{ index }}
-        {{ obj.title }}
+      <h2>todos em aberto</h2>
+      <div v-for="todo in uncompletedTodos" :key="todo.id">
+        {{ todo.title }}
+        <input type="checkbox" name="" id="" v-model="todo.completed" />
       </div>
+    </div>
+    <div>
+      <h2>todos completas</h2>
+      <div v-for="todo in completedTodos" :key="todo.id">
+          {{ todo.title }}
+          <input type="checkbox" name="" id="" v-model="todo.completed" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,19 +23,12 @@
     name: 'App',
     data() {
       return {
-        classVar: 'title',
-        pClass: ['title','textHome'],
-        styleClass: {backgroundColor: 'black', color: 'aqua'},
-        isHome: true,
-        text: true,
         todos: [
           {
             "userId": 1,
             "id": 1,
             "title": "delectus aut autem",
-            "completed": false,
-            "imgSrc": 'https://placehold.co/100',
-            "imgAlt": 'img alt'
+            "completed": false
           },
           {
             "userId": 1,
@@ -68,38 +56,23 @@
           }
         ]
       }
+    },
+    methods: {
+      onClick($evt){
+        console.log('click', $evt);
+      }
+    },
+    computed: {
+      uncompletedTodos(){
+        return this.todos.filter(todo => !todo.completed)
+      },
+      completedTodos(){
+        return this.todos.filter(todo => todo.completed)
+      }
     }
   }
 </script>
 
 <style>
-  #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
-  .todos-item {
-    background-color: #000;
-    padding: .5rem;
-    margin: .5rem;
-    color: #fff;
-  }
-  .title {
-    font-size: 20px;
-    color: blue;
-  }
-  .title-home {
-    color: green;
-  }
-  .text {
-    color: gray;
-  }
-  .textHome {
-    color: #42b983;
-  }
-  .styleClass {
-    color: aqua
-  }
+
 </style>
