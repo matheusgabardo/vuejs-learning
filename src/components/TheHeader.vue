@@ -1,28 +1,20 @@
 <template>
     <header class="header">
-        <div>
-            Header
-        </div>
+        <h1 v-if="$slots.title">
+            <slot name="title"/>
+        </h1>
     </header>
+    <div class="description">
+        <p v-if="$slots.description">
+            <slot name="description"/>
+        </p>
+    </div>
 </template>
 
 <script>
     export default {
         name: 'TheHeader',
-        mounted(){
-            window.addEventListener('resize', this.resize)
-        },
-        beforeUnmount(){
-            console.log('beforeUnmount');
-            window.removeEventListener('resize', this.resize)
-        },
-        // unmounted(){
-        //     console.log('unmounted');
-        // },
         methods: {
-            resize($evt){
-                console.log('alterou a janela', $evt)
-            }
         }
     }
 </script>
