@@ -1,24 +1,16 @@
 <template>
-  <div>
-    <TheHeader>
-      <template v-slot:title>
-        home
-      </template>
-      <template v-slot:description></template>
-    </TheHeader>
-  </div>
+    <BaseCard />
 </template>
 
 <script>
-  import TheHeader from './components/TheHeader.vue';
-
+  import BaseCard from '@/components/BaseCard.vue';
   export default {
     name: 'App',
     components:{
-      TheHeader,
+      BaseCard,
     },
     data() {
-      return {
+      return { 
         name: 'Matheus',
         showHeader: false,
       }
