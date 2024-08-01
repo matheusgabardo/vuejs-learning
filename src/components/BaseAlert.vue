@@ -1,7 +1,11 @@
 <template>
-    <div :class="variantClass">
-        {{ test }}
+    <div 
+        :class="variantClass"
+    >   
         <slot />
+        <button @click="onClick()">
+            X
+        </button>
     </div>
 </template>
 
@@ -11,10 +15,6 @@ export default{
         variant: {
             type: String,
             default: ''
-        },
-        text: {
-            type: Object,
-            default: () => {},
         }
     },
     computed: {
@@ -24,7 +24,12 @@ export default{
                 this.variant ? `alert-${this.variant}` : ''
             ]
         }
-    }
+    },
+    methods: {
+      onClick() {
+        this.$emit('close')
+      }
+    },
 }
 </script>
 

@@ -1,5 +1,9 @@
 <template>
-    <BaseAlert :variant="variant">
+    <BaseAlert 
+      v-if="showAlert"
+      :variant="variant" class="base-alert"
+      @close="onClose()"
+    >
       <slot>{{ text }}</slot>
     </BaseAlert>
 </template>
@@ -13,25 +17,24 @@
     },
     data() {
       return { 
-        variant: 'danger',
+        showAlert: true,
+        variant: 'success',
         text: 'Seu form foi aceito'
       }
     },
-    beforeUpdate(){},
-    updated(){},
-    beforeCreate(){},
-    created(){},
-    beforeMount(){},
-    mounted(){},
-    beforeUnmount(){},
-    unmounted(){},
-    methods: {
-    },
     computed: {
+    },
+    methods: {
+        onClose() {
+          this.showAlert = false
+        }
     }
   }
 </script>
 
 <style>
-
+  .base-alert {
+    display: flex;
+    justify-content: space-between;
+  }
 </style>
