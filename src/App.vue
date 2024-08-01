@@ -1,18 +1,20 @@
 <template>
-    <BaseCard />
+    <BaseAlert :variant="variant">
+      <slot>{{ text }}</slot>
+    </BaseAlert>
 </template>
 
 <script>
-  import BaseCard from '@/components/BaseCard.vue';
+  import BaseAlert from '@/components/BaseAlert.vue';
   export default {
     name: 'App',
     components:{
-      BaseCard,
+      BaseAlert,
     },
     data() {
       return { 
-        name: 'Matheus',
-        showHeader: false,
+        variant: 'danger',
+        text: 'Seu form foi aceito'
       }
     },
     beforeUpdate(){},
