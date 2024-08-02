@@ -1,20 +1,20 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+  import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink :to="rotaDinamica">Services</RouterLink>
+        <RouterLink to="/services">Services</RouterLink>
+        <RouterLink to="/users/10">Users</RouterLink>
       </nav>
+    </div>
+    <div>
+      <button @click="updateUser()">save user</button>
     </div>
   </header>
 
@@ -22,13 +22,23 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <script>
-export default {
-  data(){
-    return{
-      rotaDinamica: { name: 'services' }
+  export default {
+    name: 'App',
+    components: {},
+    data(){
+      return{
+      }
+    },
+    methods:{
+      updateUser(){
+        const newUser = {
+          user_name: 'Matheus',
+          user_lastName: 'Messias'
+        }
+        this.$store.commit('storeUser', newUser)
+      }
     }
   }
-}
 </script>
 
 <style scoped>
