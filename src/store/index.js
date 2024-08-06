@@ -51,5 +51,15 @@ export default createStore({
     total(state) {
       return state.cart.reduce((total, item) => total += item.price, 0)
     },
+  },
+  actions: {
+    storeUser(context, data){
+      return new Promise((resolve) => {
+        setTimeout(()=> {
+          resolve()
+          console.log('here')
+        },3000)
+      })
+    }
   }
 })

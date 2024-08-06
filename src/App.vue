@@ -6,6 +6,7 @@
 <template class="main-wrapper">
   <div>
     <AppProducts />
+    <button @click="updateUser()">Update user</button>
   </div>
 </template>
 
@@ -23,7 +24,10 @@
           user_name: 'Matheus',
           user_lastName: 'Messias'
         }
-        this.$store.commit('storeUser', newUser)
+        // this.$store.commit('storeUser', newUser)
+        this.$store.dispatch('storeUser', newUser).then(()=>{
+          console.log('terminou')
+        })
       },
     }
   }
