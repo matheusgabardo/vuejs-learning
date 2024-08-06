@@ -1,5 +1,7 @@
 <template class="main-wrapper">
   <div>
+    <button @click="showAppHook = !showAppHook" >show app hook</button>
+    <AppHook v-if="showAppHook"/>
     <br/>
     <button @click="user.first_name = 'Matheus'">Mudar nome</button>
     <br/>
@@ -16,10 +18,12 @@
 <script>
 
   import { ref, computed, watch } from 'vue';
+  import AppHook from './components/AppHook.vue';
 
   export default {
     name: 'App',
     components: {
+      AppHook
     },
     setup(){
       const user = ref({
@@ -34,9 +38,13 @@
       watch(user,() => {
         console.log('name changed!')
       }, { deep: true })
+
+      const showAppHook = ref(true)
+
       return{
         fullName,
-        user
+        user,
+        showAppHook
       }
     }
   }
