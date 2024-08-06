@@ -1,16 +1,13 @@
 <template class="main-wrapper">
   <div>
     <br/>
-    <button @click="changeName()">Mudar nome</button>
+    <button @click="user.first_name = 'Matheus'">Mudar nome</button>
     <br/>
-    <br/>
-    <br/>
-    <br/>
-    {{ name }}
     <br/>
     {{  user.first_name }}
     <br/>
-    {{  admin.first_name }}
+    <br>
+    {{ fullName }}
     <!-- Em resumo o composition api controla o que é ou não reativo.
     ativada ao inicio substituindo created, beforeCreated. -->
   </div>
@@ -18,34 +15,27 @@
 
 <script>
 
-  import { reactive } from 'vue';
-  import { ref } from 'vue';
+  import { ref, computed, watch } from 'vue';
 
   export default {
     name: 'App',
     components: {
     },
     setup(){
-      let name = "matheus"
-
-      const user = reactive({
+      const user = ref({
         first_name: 'Jhon',
         last_name: 'Snow'
       })
-      const admin = ref({
-        first_name: 'admin',
-        last_name: 'master'
+
+      const fullName = computed(() => {
+        return `${user.value.first_name} ${user.value.last_name}`
       })
-      const changeName = () => {
-        alert('name changed');
-        name = 'Matheus Gabardo';
-        user.first_name = 'Greg';
-        admin.value.first_name = 'administrador';
-      }
+
+      watch(user,() => {
+        console.log('name changed!')
+      }, { deep: true })
       return{
-        name,
-        admin,
-        changeName,
+        fullName,
         user
       }
     }
