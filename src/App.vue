@@ -1,39 +1,52 @@
 <template class="main-wrapper">
   <div>
-    <AppProduct />
-    <br/>
-    <br/>
-    <br/>
     <br/>
     <button @click="changeName()">Mudar nome</button>
     <br/>
     <br/>
     <br/>
     <br/>
-    <br/>
     {{ name }}
+    <br/>
+    {{  user.first_name }}
+    <br/>
+    {{  admin.first_name }}
     <!-- Em resumo o composition api controla o que é ou não reativo.
     ativada ao inicio substituindo created, beforeCreated. -->
   </div>
 </template>
 
 <script>
-import AppProduct from './components/AppProduct.vue';
+
+  import { reactive } from 'vue';
+  import { ref } from 'vue';
 
   export default {
     name: 'App',
     components: {
-      AppProduct
     },
     setup(){
       let name = "matheus"
+
+      const user = reactive({
+        first_name: 'Jhon',
+        last_name: 'Snow'
+      })
+      const admin = ref({
+        first_name: 'admin',
+        last_name: 'master'
+      })
       const changeName = () => {
         alert('name changed');
         name = 'Matheus Gabardo';
+        user.first_name = 'Greg';
+        admin.value.first_name = 'administrador';
       }
       return{
         name,
-        changeName
+        admin,
+        changeName,
+        user
       }
     }
   }
