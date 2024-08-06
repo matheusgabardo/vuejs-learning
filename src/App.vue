@@ -1,34 +1,40 @@
-<script setup>
-  import { RouterView } from 'vue-router'
-  import AppProducts from './components/products/AppProducts.vue';
-</script>
-
 <template class="main-wrapper">
   <div>
-    <AppProducts />
-    <button @click="updateUser()">Update user</button>
+    <AppProduct />
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <button @click="changeName()">Mudar nome</button>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {{ name }}
+    <!-- Em resumo o composition api controla o que é ou não reativo.
+    ativada ao inicio substituindo created, beforeCreated. -->
   </div>
 </template>
 
 <script>
+import AppProduct from './components/AppProduct.vue';
+
   export default {
     name: 'App',
-    components: {},
-    data(){
-      return{
-      }
+    components: {
+      AppProduct
     },
-    methods:{
-      updateUser(){
-        const newUser = {
-          user_name: 'Matheus',
-          user_lastName: 'Messias'
-        }
-        // this.$store.commit('storeUser', newUser)
-        this.$store.dispatch('storeUser', newUser).then(()=>{
-          console.log('terminou')
-        })
-      },
+    setup(){
+      let name = "matheus"
+      const changeName = () => {
+        alert('name changed');
+        name = 'Matheus Gabardo';
+      }
+      return{
+        name,
+        changeName
+      }
     }
   }
 </script>
