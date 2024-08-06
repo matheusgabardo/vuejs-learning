@@ -1,50 +1,30 @@
 <template class="main-wrapper">
   <div>
-    <button @click="showAppHook = !showAppHook" >show app hook</button>
-    <AppHook v-if="showAppHook"/>
-    <br/>
-    <button @click="user.first_name = 'Matheus'">Mudar nome</button>
-    <br/>
-    <br/>
-    {{  user.first_name }}
-    <br/>
-    <br>
-    {{ fullName }}
-    <!-- Em resumo o composition api controla o que é ou não reativo.
-    ativada ao inicio substituindo created, beforeCreated. -->
+    <AppButton 
+      data-vue="Jhon"
+      variant="danger"
+      @update="getUpdate"
+      >
+      <template #icon>Icon</template>
+    </AppButton>
   </div>
 </template>
 
 <script>
 
-  import { ref, computed, watch } from 'vue';
-  import AppHook from './components/AppHook.vue';
+  import AppButton from './components/AppButton.vue';
 
   export default {
     name: 'App',
     components: {
-      AppHook
+      AppButton
     },
     setup(){
-      const user = ref({
-        first_name: 'Jhon',
-        last_name: 'Snow'
-      })
-
-      const fullName = computed(() => {
-        return `${user.value.first_name} ${user.value.last_name}`
-      })
-
-      watch(user,() => {
-        console.log('name changed!')
-      }, { deep: true })
-
-      const showAppHook = ref(true)
-
+      const getUpdate = (data) => {
+        console.log('getUpdate in parent',data)
+      }
       return{
-        fullName,
-        user,
-        showAppHook
+        getUpdate,
       }
     }
   }
