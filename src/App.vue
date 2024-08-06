@@ -1,24 +1,12 @@
 <script setup>
-  import { RouterLink, RouterView } from 'vue-router'
+  import { RouterView } from 'vue-router'
+  import AppProducts from './components/products/AppProducts.vue';
 </script>
 
-<template>
-  <header>
-
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/services">Services</RouterLink>
-        <RouterLink to="/users/10">Users</RouterLink>
-      </nav>
-    </div>
-    <div>
-      <button @click="updateUser()">save user</button>
-    </div>
-  </header>
-
-  <RouterView />
+<template class="main-wrapper">
+  <div>
+    <AppProducts />
+  </div>
 </template>
 
 <script>
@@ -36,7 +24,7 @@
           user_lastName: 'Messias'
         }
         this.$store.commit('storeUser', newUser)
-      }
+      },
     }
   }
 </script>
@@ -102,5 +90,9 @@
       padding: 1rem 0;
       margin-top: 1rem;
     }
+  }
+  .main-wrapper {
+    display: flex;
+    flex-direction: column;
   }
 </style>
