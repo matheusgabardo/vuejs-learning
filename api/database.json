@@ -1,28 +1,28 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "Estudar javascript",
-      "completed": true
+      "title": "Estudar JS",
+      "completed": false,
+      "id": 1
     },
     {
-      "id": 2,
       "title": "Estudar Vue",
-      "completed": false
+      "completed": true,
+      "id": 2
     },
     {
-      "id": 3,
       "title": "Estudar composition API",
-      "completed": false
+      "completed": true,
+      "id": 3
     },
     {
       "title": "aa",
-      "completed": false,
+      "completed": true,
       "id": 4
     },
     {
       "title": "aa",
-      "completed": false,
+      "completed": true,
       "id": 5
     },
     {
