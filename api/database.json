@@ -1,49 +1,14 @@
 {
   "todos": [
     {
-      "title": "Estudar JS",
+      "title": "dasdas",
       "completed": false,
-      "id": 1
-    },
-    {
-      "title": "Estudar Vue",
-      "completed": true,
       "id": 2
     },
     {
-      "title": "Estudar composition API",
-      "completed": true,
+      "title": "adasdas",
+      "completed": false,
       "id": 3
-    },
-    {
-      "title": "aa",
-      "completed": true,
-      "id": 4
-    },
-    {
-      "title": "aa",
-      "completed": true,
-      "id": 5
-    },
-    {
-      "title": "bbb",
-      "completed": false,
-      "id": 6
-    },
-    {
-      "title": "ccc",
-      "completed": false,
-      "id": 7
-    },
-    {
-      "title": "ddd",
-      "completed": false,
-      "id": 8
-    },
-    {
-      "title": "eee",
-      "completed": false,
-      "id": 9
     }
   ]
 }

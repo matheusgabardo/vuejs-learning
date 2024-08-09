@@ -4,8 +4,8 @@
       <TodoSpinner v-if="loading" />
       <template v-else>
         <TodoForm />
-        <TodoItems />
-        <TodoNotFound />
+        <TodoItems v-if="$store.state.todos.length"/>
+        <TodoNotFound v-else/>
       </template>
     </div>
   </div>
