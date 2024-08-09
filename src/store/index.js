@@ -36,7 +36,7 @@ export default createStore({
               commit('storeTodos', response.data)
               resolve()
             })
-        }, 0)
+        }, 1000)
       })
     },
     addTodo({commit}, data){

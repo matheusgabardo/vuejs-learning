@@ -4,10 +4,8 @@
 border-gray-400 last:border-b-0">
             <div class="flex items-center justify-center 
 mr-2">
-                <button
-                 :class="{'text-green-500':isCompleted, 'text-green-500': !isCompleted , }"
-                 @click="onCheckClick"
-                >
+                <button :class="{ 'text-green-500': isCompleted, 'text-gray-800': !isCompleted, }"
+                    @click="onCheckClick">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
@@ -17,20 +15,13 @@ mr-2">
             </div>
 
             <div class="w-full">
-                <input
-                    type="text"
-                    v-model="title"
-                    placeholder="Digite a sua tarefa"
+                <input type="text" v-model="title" placeholder="Digite a sua tarefa"
                     class="bg-gray-300 placeholder-gray-500 text-gray-700 font-light focus:outline-none block w-full appearance-none leading-normal mr-3"
-                    @keyup.enter="onTitleChange"
-                >
+                    @keyup.enter="onTitleChange">
             </div>
             <div class="ml-auto flex items-center 
 justify-center">
-                <button
-                 class="focus:outline-none"
-                 @click="onDelete"
-                >
+                <button class="focus:outline-none" @click="onDelete">
                     <svg class="ml-3 h-4 w-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 7L18.1327 19.1425C18.0579 
@@ -44,40 +35,49 @@ justify-center">
     </div>
 </template>
 <script>
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+
 export default {
+    setup(props) {
+        const title = ref(props.todo.title);
+        const isCompleted = ref(props.todo.completed);
+        const store = useStore();
+
+        const updateTodo = () => {
+            const payload = {
+                id: props.todo.id,
+                data: {
+                    title: title.value,
+                    completed: isCompleted.value
+                }
+            }
+            store.dispatch('updateTodo', payload)
+        }
+
+        const onTitleChange = () => {
+            if (!title.value) return alert('Digite um novo titulo');
+            updateTodo()
+        }
+        const onCheckClick = () => {
+            isCompleted.value = !isCompleted.value;
+            updateTodo()
+        }
+        const onDelete = () => {
+            store.dispatch('deleteTodo', props.todo.id)
+        }
+        return {
+            title,
+            isCompleted,
+            onTitleChange,
+            onCheckClick,
+            onDelete
+        }
+    },
     props: {
         todo: {
             type: Object,
         }
     },
-    data() {
-        return {
-            title: this.todo.title,
-            isCompleted: this.todo.completed
-        }
-    },
-    methods:{
-        onTitleChange(){
-            if(!this.title) return alert('Digite um novo titulo');
-            this.updateTodo()
-        },
-        updateTodo(){
-            const payload = {
-                id: this.todo.id,
-                data: {
-                    title: this.title,
-                    completed: this.isCompleted
-                }
-            }
-            this.$store.dispatch('updateTodo', payload)
-        },
-        onCheckClick(){
-            this.isCompleted = !this.isCompleted;
-            this.updateTodo()
-        },
-        onDelete(){
-            this.$store.dispatch('deleteTodo', this.todo.id)
-        }
-    }
 }
 </script>
