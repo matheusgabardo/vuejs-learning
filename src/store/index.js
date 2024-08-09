@@ -22,7 +22,7 @@ export default createStore({
     },
     deleteTodo(state, id){
       const index = state.todos.findIndex(todos => todos.id === id)
-      if(index){
+      if(index >= 0){
         state.todos.splice(index, 1)
       }
     }
